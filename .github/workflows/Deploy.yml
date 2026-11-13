@@ -26,15 +26,12 @@ jobs:
         npm install
         npm run build
 
-    # 4. Upload to the Subdomain Folder
-    # ✅ CORRECT (Includes the secrets)
-    - name: SFTP Deploy
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+    # 4. Upload to the Subdomain Folder via FTP / FTPS
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local_path: './dist/*'
-        remote_path: 'public_html'
-        port: 22
-        sftp_only: true
+        local-dir: ./dist/
+        server-dir: public_html/
